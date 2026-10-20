@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<ruleset name="WP DuckDB">
+	<description>Coding standard for the WP DuckDB plugin.</description>
+
+	<file>wp-duckdb.php</file>
+	<file>uninstall.php</file>
+	<file>src</file>
+
+	<arg value="s"/>
+	<arg name="extensions" value="php"/>
+	<arg name="colors"/>
+
+	<config name="minimum_supported_wp_version" value="6.4"/>
+	<config name="testVersion" value="8.1-"/>
+
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+
+	<rule ref="WordPress-Extra">
+		<exclude name="WordPress.Files.FileName"/>
+		<exclude name="WordPress.NamingConventions.ValidFunctionName"/>
+		<exclude name="WordPress.NamingConventions.ValidVariableName"/>
+		<exclude name="WordPress.PHP.YodaConditions"/>
+		<exclude name="Squiz.Commenting.FunctionComment"/>
+		<exclude name="Squiz.Commenting.FunctionCommentThrowTag"/>
+		<exclude name="Squiz.Commenting.ClassComment"/>
+		<exclude name="Squiz.Commenting.VariableComment"/>
+		<exclude name="Generic.Commenting.DocComment"/>
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax"/>
+		<!-- This plugin's job is intentional database access. Caching those reads would hide live rows. -->
+		<exclude name="WordPress.DB.DirectDatabaseQuery.DirectQuery"/>
+		<exclude name="WordPress.DB.DirectDatabaseQuery.NoCaching"/>
+		<!-- Exception messages are not HTML output. -->
+		<exclude name="WordPress.Security.EscapeOutput.ExceptionNotEscaped"/>
+	</rule>
+
+	<rule ref="PHPCompatibilityWP"/>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="wp_duckdb"/>
+				<element value="WP_DUCKDB"/>
+				<element value="Rawdreeg"/>
+			</property>
+		</properties>
+	</rule>
+</ruleset>

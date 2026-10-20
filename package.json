@@ -1,0 +1,20 @@
+{
+  "name": "wp-duckdb",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Admin assets for the WP DuckDB plugin.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/js/*.test.mjs"
+  },
+  "dependencies": {
+    "@duckdb/duckdb-wasm": "1.32.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.10"
+  }
+}

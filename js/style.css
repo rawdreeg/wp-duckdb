@@ -1,0 +1,152 @@
+.wp-duckdb-app {
+  --ink: #1d2327;
+  --muted: #646970;
+  --line: #c3c4c7;
+  --panel: #fff;
+  --warn: #f5efe0;
+  --warn-ink: #614200;
+  --ok: #edf5ed;
+  --ok-ink: #0f4c1e;
+  --bad: #f8e8e8;
+  --bad-ink: #6d1616;
+  color: var(--ink);
+  max-width: 1180px;
+}
+
+.wp-duckdb-lede {
+  max-width: 70ch;
+  color: var(--muted);
+}
+
+.wp-duckdb-layout {
+  display: grid;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: 16px;
+  align-items: start;
+}
+
+.wp-duckdb-side,
+.wp-duckdb-main {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 12px;
+}
+
+.wp-duckdb-side h2,
+.wp-duckdb-main h2,
+.wp-duckdb-diff h3,
+.wp-duckdb-diff h4 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.wp-duckdb-tables {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.wp-duckdb-tables label,
+.wp-duckdb-confirm,
+.wp-duckdb-limit {
+  display: flex;
+  gap: 6px;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.wp-duckdb-muted {
+  color: var(--muted);
+}
+
+.wp-duckdb-limit input {
+  width: 6rem;
+  margin-left: auto;
+}
+
+.wp-duckdb-sql {
+  width: 100%;
+  min-height: 180px;
+  margin: 6px 0 10px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.wp-duckdb-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.wp-duckdb-status {
+  min-height: 1.2em;
+  color: var(--muted);
+}
+
+.wp-duckdb-notice {
+  margin: 8px 0;
+  padding: 8px 10px;
+  border: 1px solid var(--line);
+}
+
+.wp-duckdb-notice.is-error {
+  background: var(--bad);
+  color: var(--bad-ink);
+}
+
+.wp-duckdb-notice.is-ok {
+  background: var(--ok);
+  color: var(--ok-ink);
+}
+
+.wp-duckdb-notice.is-warn {
+  background: var(--warn);
+  color: var(--warn-ink);
+}
+
+.wp-duckdb-grid {
+  overflow: auto;
+  max-height: 420px;
+  border: 1px solid var(--line);
+  margin-bottom: 16px;
+}
+
+.wp-duckdb-grid table {
+  border-collapse: collapse;
+  width: max-content;
+  min-width: 100%;
+  font-size: 12px;
+}
+
+.wp-duckdb-grid th,
+.wp-duckdb-grid td {
+  border-bottom: 1px solid var(--line);
+  padding: 4px 8px;
+  text-align: left;
+  vertical-align: top;
+  max-width: 320px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.wp-duckdb-grid th {
+  position: sticky;
+  top: 0;
+  background: #f6f7f7;
+}
+
+.wp-duckdb-diff ul {
+  margin: 0 0 10px 18px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12px;
+}
+
+@media (max-width: 960px) {
+  .wp-duckdb-layout {
+    grid-template-columns: 1fr;
+  }
+}

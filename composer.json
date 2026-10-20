@@ -1,0 +1,48 @@
+{
+    "name": "rawdreeg/wp-duckdb",
+    "description": "Query and edit the WordPress database with DuckDB WASM.",
+    "type": "wordpress-plugin",
+    "license": "MIT",
+    "keywords": ["wordpress", "duckdb", "database"],
+    "authors": [
+        {
+            "name": "Rodrigue",
+            "homepage": "https://github.com/rawdreeg"
+        }
+    ],
+    "homepage": "https://github.com/rawdreeg/wp-duckdb",
+    "require": {
+        "php": ">=8.1"
+    },
+    "require-dev": {
+        "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
+        "phpcompatibility/phpcompatibility-wp": "^2.1",
+        "phpunit/phpunit": "^10.5",
+        "wp-coding-standards/wpcs": "^3.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rawdreeg\\WpDuckdb\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Rawdreeg\\WpDuckdb\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit -c phpunit.xml.dist",
+        "phpcs": "phpcs",
+        "phpcbf": "phpcbf"
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        },
+        "platform": {
+            "php": "8.1.32"
+        },
+        "sort-packages": true
+    },
+    "minimum-stability": "stable"
+}
