@@ -59,4 +59,4 @@ PHPUnit covers the allowlist, value casting, export payload, and diff validation
 
 ## Uninstall
 
-`uninstall.php` deletes the `wp_duckdb_settings` option if a future version stores one. Version 0.1 does not write options. Deactivating the plugin does not change table rows that were already applied.
+`uninstall.php` deletes the `wp_duckdb_settings` option if a future version stores one. Version 0.1.1 does not write options. Deactivating the plugin does not change table rows that were already applied.
