@@ -2,7 +2,7 @@
 /**
  * Plugin Name: WP DuckDB
  * Description: Query and edit the site database in DuckDB WASM, then apply a structured diff with prepared statements.
- * Version: 0.1.0
+ * Version: 0.1.1
  * Requires at least: 6.4
  * Requires PHP: 8.1
  * Author: Rodrigue
@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 define( 'WP_DUCKDB_FILE', __FILE__ );
-define( 'WP_DUCKDB_VERSION', '0.1.0' );
+define( 'WP_DUCKDB_VERSION', '0.1.1' );
 
 if ( is_readable( __DIR__ . '/vendor/autoload.php' ) ) {
 	require __DIR__ . '/vendor/autoload.php';

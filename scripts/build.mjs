@@ -1,7 +1,8 @@
-import { copyFileSync, mkdirSync, readFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import * as esbuild from 'esbuild';
+import { patchMvpWorker } from './patch-mvp-worker.mjs';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'node_modules/@duckdb/duckdb-wasm/dist');
@@ -14,7 +15,7 @@ const wasmTo = join(root, 'assets/duckdb/duckdb-mvp.wasm');
 const workerTo = join(root, 'assets/duckdb/duckdb-browser-mvp.worker.js');
 
 copyFileSync(wasmFrom, wasmTo);
-copyFileSync(workerFrom, workerTo);
+writeFileSync(workerTo, patchMvpWorker(readFileSync(workerFrom, 'utf8')));
 
 const magic = readFileSync(wasmTo).subarray(0, 4).toString('utf8');
 if (magic !== '\0asm') {

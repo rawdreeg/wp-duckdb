@@ -99,24 +99,36 @@ async function createAndFill(conn, table) {
   }
 }
 
+const MAX_SAFE = 9007199254740991n;
+
+// duckdb-wasm JSON.stringifies prepared parameters before they reach the
+// worker. BigInt cannot cross that boundary. BIGINT values travel as decimal
+// strings and the INSERT casts them.
 function bindParam(column, value) {
+  if (typeof value === 'bigint') {
+    value = value.toString();
+  }
   if (value === null || value === undefined) {
     return null;
   }
   if (column.duckdb === 'BIGINT') {
-    if (typeof value === 'bigint') {
-      return value;
-    }
     if (typeof value === 'number' && Number.isInteger(value)) {
-      return BigInt(value);
+      return String(value);
+    }
+    if (typeof value === 'boolean') {
+      return value ? '1' : '0';
     }
     if (typeof value === 'string' && /^-?\d+$/.test(value)) {
-      return BigInt(value);
+      return value;
     }
+    return null;
   }
   if (column.duckdb === 'DOUBLE') {
     const number = typeof value === 'number' ? value : Number(value);
     return Number.isFinite(number) ? number : null;
+  }
+  if (typeof value === 'boolean') {
+    return value ? '1' : '0';
   }
   return value;
 }
@@ -127,16 +139,26 @@ function rowsFromTable(table) {
   }
   const fields = table.schema?.fields?.map((field) => field.name) ?? [];
   return table.toArray().map((record) => {
-    const source = typeof record?.toJSON === 'function' ? record.toJSON() : record;
-    if (!fields.length) {
-      return { ...source };
-    }
+    const names = fields.length ? fields : Object.keys(record);
     const row = {};
-    for (const name of fields) {
-      row[name] = source[name] === undefined ? null : source[name];
+    for (const name of names) {
+      row[name] = jsonSafe(record[name]);
     }
     return row;
   });
+}
+
+function jsonSafe(value) {
+  if (value === undefined) {
+    return null;
+  }
+  if (typeof value === 'bigint') {
+    if (value <= MAX_SAFE && value >= -MAX_SAFE) {
+      return Number(value);
+    }
+    return value.toString();
+  }
+  return value;
 }
 
 function closeResult(result) {
